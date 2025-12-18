@@ -3,6 +3,7 @@ from model import Product
 from database import SessionLocal, engine
 import database_models
 from sqlalchemy.orm import Session
+import logging
 
 app = FastAPI()
 
@@ -13,10 +14,10 @@ def greet():
     return "welcome to telusko track"
 
 products = [
-    Product(id=1, name="Phone", description="A smartphone", price=699.99, quantity=50),
-    Product(id=2, name="Laptop", description="A powerful laptop", price=999.99, quantity=30),
-    Product(id=3, name="Pen", description="A blue ink pen", price=1.99, quantity=100),
-    Product(id=4, name="Table", description="A wooden table", price=199.99, quantity=20),
+    Product(1, "Phone", "A smartphone", 699.99, 50),
+    Product(2, "Laptop", "A powerful laptop", 999.99, 30),
+    Product(5, "Pen", "A blue ink pen", 1.99, 100),
+    Product(6, "Table", "A wooden table", 199.99, 20),
 ]
 
 def get_db():
@@ -28,12 +29,11 @@ def get_db():
 
 def init_db():
     db = SessionLocal()
-    count=db.query(database_models.Product).count
+    count=db.query(database_models.Product).count()
     if count==0:
         for product in products:
             db.add(database_models.Product(**product.model_dump()))
         db.commit()
-    
 init_db()
 
 @app.get("/product")
