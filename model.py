@@ -9,7 +9,3 @@ class Product(BaseModel):
     
     def __init__(self,id: int,name: str,description: str,price: float, quantity: int):
         super().__init__(id=id,name=name,description=description,price=price,quantity=quantity)
-        
-    
-    
-    
