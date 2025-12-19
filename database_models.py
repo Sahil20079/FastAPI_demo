@@ -12,4 +12,3 @@ class Product(Base):
     description = Column(String)
     price = Column(Float)
     quantity = Column(Integer)
-    
