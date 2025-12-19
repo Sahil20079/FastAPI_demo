@@ -14,23 +14,23 @@ products = [
     Product(id=4, name="Table", description="A wooden table", price=199.99, quantity=20),
 ]
 
-@app.get("/product")
+@app.get("/products/")
 def get_all_products():
     return products
 
-@app.get("/product/{id}")
+@app.get("/products/{id}")
 def get_products_with_id(id: int):
     for product in products:
         if product.id == id:
             return product
     return "product not found"
     
-@app.post("/product/")
+@app.post("/products/")
 def add_product(product: Product):
     products.append(product)
     return product
 
-@app.put("/product")
+@app.put("/products/{id}")
 def update_product(id: int, product: Product):
     for i in range(len(products)):
         if products[i].id==id:
@@ -38,7 +38,7 @@ def update_product(id: int, product: Product):
            return "product successfully added"
     return "product not found"
 
-@app.delete("/product")
+@app.delete("/products/{id}")
 def delete_product(id: int):
     for i in range(len(products)):
         if products[id]==id:
